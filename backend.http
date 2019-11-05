@@ -1,0 +1,12 @@
+GET https://users-dasw.herokuapp.com/api/tokenDASW
+x-expediente: 709385
+
+
+
+
+
+##
+#{
+  #"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw"
+#}
+
