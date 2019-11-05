@@ -7,7 +7,8 @@ form.addEventListener("change", validateInput);
 
 function validateInput() {
     var formList = document.querySelectorAll("form input:invalid");
-    console.table(formList);
+    let arr = Array.from(formList);
+    if(Array)
     
 }
 
