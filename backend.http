@@ -1,6 +1,22 @@
-GET https://users-dasw.herokuapp.com/api/tokenDASW
-x-expediente: 709385
+##GETTING STUDENT TOKEN
+##GET https://users-dasw.herokuapp.com/api/tokenDASW
+##x-expediente: 709385
 
+
+##REGISTERING USER
+POST https://users-dasw.herokuapp.com/api/users/
+Content-Type: application/json
+x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+
+{
+  "nombre":"L",
+  "apellido":"G",
+  "correo":"t12@t.com",
+  "url":"",
+  "sexo":"H",
+  "fecha":"10-10-2019",
+  "password":"12345"
+}
 
 
 
