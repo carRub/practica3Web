@@ -1,8 +1,12 @@
 "useStrict"
 
 //saving my token
-window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw");
-//localStorage.getItem("token")
+window.localStorage.setItem("tokenAlumno", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw");
+//localStorage.getItem("tokenAlumno")
+
+//count for the urls
+var menCount = 0;
+var womenCount = 0;
 
 //Base URL
 var baseUrl = "https://users-dasw.herokuapp.com/api/"
@@ -11,7 +15,7 @@ var baseUrl = "https://users-dasw.herokuapp.com/api/"
 var user = {};
 
 //registry form
-var form = document.querySelector('.modal-body form'); 
+var form = document.getElementById("registryForm");
 form.addEventListener("change", validateInput);
 form.addEventListener("submit", submitForm);
 
@@ -27,8 +31,8 @@ loginButton.onclick = loginRequest;
 
 //form onchange listener
 function validateInput() {
-    var formInvalidList = document.querySelectorAll("form input:invalid");
-    var formValidList = document.querySelectorAll("form input:valid");
+    var formInvalidList = document.querySelectorAll("#registryForm input:invalid");
+    var formValidList = document.querySelectorAll("#registryForm input:valid");
 
     //passwords
     var password1 = document.getElementById("password1");
@@ -37,6 +41,7 @@ function validateInput() {
     if(formInvalidList.length > 0){
         let arr = Array.from(formInvalidList);
         arr.forEach((item) => item.setAttribute("style", "border-color: red;"));
+        submit.disabled = true;
     }
     if(formValidList.length > 0){
         let validArr = Array.from(formValidList);
@@ -57,13 +62,25 @@ function validateInput() {
 function submitForm(event) {
     event.preventDefault();
 
-    let inputArr = Array.from(document.querySelectorAll("form input:valid"));
-    inputArr.forEach(createInputJson);    
+    let inputArr = Array.from(document.querySelectorAll("#registryForm input:valid"));
+    inputArr.forEach(createInputJson); 
 
+    //manage de URL
+    if(user.url == ""){
+        if(user.sexo == 'H'){
+            if(menCount == 99) menCount = 0;
+            user.url = `https://randomuser.me/api/portraits/men/${++menCount}.jpg`;
+        }else {
+            if(womenCount == 99) womenCount = 0;
+            user.url = `https://randomuser.me/api/portraits/women/${++womenCount}.jpg`;
+        }
+    } 
+
+    //HTTP request
     let xhr = new XMLHttpRequest();
     xhr.open('POST', `${baseUrl}users/`);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('x-auth', localStorage.getItem("token"));
+    xhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
     xhr.send(JSON.stringify(user));
     xhr.onload = function() {
         if(xhr.status != 201){
@@ -83,19 +100,22 @@ function loginRequest() {
         password: document.getElementById("loginPassword").value
     };
 
+    //HTTP request
     xhr = new XMLHttpRequest();
     xhr.open('POST', `${baseUrl}login/`);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('x-auth', localStorage.getItem("token"));
+    xhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
     xhr.send(JSON.stringify(loginUser));
     xhr.onload = function() {
         if(xhr.status != 200){
             //error
             alert(xhr.status + ': ' + xhr.statusText);
-            console.log(xhr.responseText);
         }else {
             //go to consultas
+            let onj = JSON.parse(xhr.responseText);
+            window.localStorage.setItem("tokenUsuario", onj.token);        
             window.location = "consulta.html";
+            console.log(localStorage.getItem("tokenUsuario"));
         }
     }
 
@@ -109,12 +129,3 @@ function createInputJson(item) {
     if(item.name == "confirmPassword") return;
     user[`${item.name}`] = item.value;
 }
-
-//alert method
-/*function createAlert(classString, message, where) {
-    let element = document.createElement("DIV");
-    element.setAttribute("class", classString);
-    element.innerText = message;
-
-    document.getElementById
-}*/
