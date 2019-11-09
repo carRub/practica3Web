@@ -5,29 +5,33 @@ window.localStorage.setItem("tokenAlumno", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 //localStorage.getItem("tokenAlumno")
 
 //count for the urls
-var menCount = 0;
-var womenCount = 0;
+if(localStorage.getItem("menCount") == null) window.localStorage.setItem("menCount", 0);
+if(localStorage.getItem("womenCount") == null) window.localStorage.setItem("menCount", 0);
 
 //Base URL
 var baseUrl = "https://users-dasw.herokuapp.com/api/"
+
+//XMLHTTPRequest
+var xhr;
 
 //user object
 var user = {};
 
 //registry form
 var form = document.getElementById("registryForm");
-form.addEventListener("change", validateInput);
-form.addEventListener("submit", submitForm);
+if(form != null){
+    form.addEventListener("change", validateInput);
+    form.addEventListener("submit", submitForm);
+}
 
 //submit button
 var submit = document.getElementById("submitRegistry");
-submit.disabled = true;
+if(submit != null) submit.disabled = true;
 
-console.log(localStorage.getItem("tokenUsuario"));
 
 //login 
 var loginButton = document.getElementById("loginButton");
-loginButton.onclick = loginRequest;
+if(loginButton != null) loginButton.onclick = loginRequest;
 
 //form onchange listener
 function validateInput() {
@@ -67,17 +71,17 @@ function submitForm(event) {
 
     //manage de URL
     if(user.url == ""){
-        if(user.sexo == 'H'){
-            if(menCount == 99) menCount = 0;
-            user.url = `https://randomuser.me/api/portraits/men/${++menCount}.jpg`;
-        }else {
-            if(womenCount == 99) womenCount = 0;
-            user.url = `https://randomuser.me/api/portraits/women/${++womenCount}.jpg`;
-        }
+        let menCount = parseInt(localStorage.getItem("menCount"));
+        let womenCount = parseInt(localStorage.getItem("womenCount"));
+
+        user.url = `https://randomuser.me/api/portraits/${user.sexo == "H" ? `men/${menCount++}` : `women/${womenCount++}`}.jpg`
+        window.localStorage.setItem("menCount", menCount);  
+        window.localStorage.setItem("womenCount", womenCount);
+
     } 
 
     //HTTP request
-    let xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.open('POST', `${baseUrl}users/`);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
@@ -85,7 +89,7 @@ function submitForm(event) {
     xhr.onload = function() {
         if(xhr.status != 201){
             //error
-            alert(xhr.status + ': ' + xhr.statusText);
+            alert(xhr.status + ': ' + xhr.statusText + ' ' + xhr.responseText);
             console.log(xhr.responseText);
         }else {
             alert("User registered succesfully"); //
@@ -109,13 +113,12 @@ function loginRequest() {
     xhr.onload = function() {
         if(xhr.status != 200){
             //error
-            alert(xhr.status + ': ' + xhr.statusText);
+            alert(xhr.status + ': ' + xhr.statusText + ' ' + xhr.responseText);
         }else {
             //go to consultas
             let onj = JSON.parse(xhr.responseText);
-            window.localStorage.setItem("tokenUsuario", onj.token);        
+            window.localStorage.setItem("tokenUsuario", onj.token);       
             window.location = "consulta.html";
-            console.log(localStorage.getItem("tokenUsuario"));
         }
     }
 }

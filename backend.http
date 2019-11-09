@@ -4,42 +4,59 @@
 
 
 ##REGISTERING USER
-##POST https://users-dasw.herokuapp.com/api/users/
-##Content-Type: application/json
-#x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+# POST https://users-dasw.herokuapp.com/api/users/
+# Content-Type: application/json
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
 
-#{
+# {
 #  "nombre":"Li",
-  #"apellido":"G",
-  #"correo":"t123@t.com",
-  #"url":"",
-  #"sexo":"H",
-  #"fecha":"10-10-2019",
-  #"password":"12345"
-#}
+#   "apellido":"G",
+#   "correo":"t123@t.com",
+#   "url":"",
+#   "sexo":"H",
+#   "fecha":"10-10-2019",
+#   "password":"12345"
+# }
 
 ##Login
-#POST https://users-dasw.herokuapp.com/api/login
-#Content-Type: application/json
-#x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+# POST https://users-dasw.herokuapp.com/api/login
+# Content-Type: application/json
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
 
-#{
+# {
 #  "correo": "c@c.com",
 #  "password": "123"
-#}
+# }
 
 
 # # ##Delete
-# DELETE https://users-dasw.herokuapp.com/api/users/c@c.com
+# DELETE https://users-dasw.herokuapp.com/api/users/qw@h.com
 # Content-Type: application/json
 # x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
-# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NCwiaWF0IjoxNTczMjYwNjk3LCJleHAiOjE1NzMyNjQyOTd9.RelJJEgC1u5OjyLDqF1sd4NaNC-w755aq4i1Yh1jF6I
+# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjc5NTAyLCJleHAiOjE1NzMyODMxMDJ9.RJqfsBjayCetnz48duQyD8qZ1ereY_E6ivb2FMFwnhU
 
 
 ##Get users
 GET https://users-dasw.herokuapp.com/api/users
-x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw 
-x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidDEyM0B0LmNvbSIsImlpZCI6MiwiaWF0IjoxNTczMjU3OTA3LCJleHAiOjE1NzMyNjE1MDd9.M6jbiz0AdcXQemOjVGvIS5IMvBC5qMKbM_loJVOvp-M
+x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjg2OTM5LCJleHAiOjE1NzMyOTA1Mzl9.WgD-yTA_CrZhS462NpmL_zsB_bj2Gio3_B6Lw1P1bqM
+
+
+### OBTENER USUARIO test2@t.com
+# GET https://users-dasw.herokuapp.com/api/users/c@c.com
+# Content-Type: application/json
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjg2OTM5LCJleHAiOjE1NzMyOTA1Mzl9.WgD-yTA_CrZhS462NpmL_zsB_bj2Gio3_B6Lw1P1bqM
+
+
+# GET https://users-dasw.herokuapp.com/api/users?hola
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjg2OTM5LCJleHAiOjE1NzMyOTA1Mzl9.WgD-yTA_CrZhS462NpmL_zsB_bj2Gio3_B6Lw1P1bqM
+
+
+
+
+
 
 
 
@@ -48,7 +65,7 @@ x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1I
   #"tokenAlumno": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw"
 #}
 
-GET https://users-dasw.herokuapp.com/api/users
-x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw 
-x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidDEyM0B0LmNvbSIsImlpZCI6MiwiaWF0IjoxNTczMjU3OTA3LCJleHAiOjE1NzMyNjE1MDd9.M6jbiz0AdcXQemOjVGvIS5IMvBC5qMKbM_loJVOvp-M
+# GET https://users-dasw.herokuapp.com/api/users
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw 
+# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidDEyM0B0LmNvbSIsImlpZCI6MiwiaWF0IjoxNTczMjU3OTA3LCJleHAiOjE1NzMyNjE1MDd9.M6jbiz0AdcXQemOjVGvIS5IMvBC5qMKbM_loJVOvp-M
   ##"tokenUsuario": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NCwiaWF0IjoxNTczMjYwNjk3LCJleHAiOjE1NzMyNjQyOTd9.RelJJEgC1u5OjyLDqF1sd4NaNC-w755aq4i1Yh1jF6I"
