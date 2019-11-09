@@ -23,7 +23,7 @@ form.addEventListener("submit", submitForm);
 var submit = document.getElementById("submitRegistry");
 submit.disabled = true;
 
-
+console.log(localStorage.getItem("tokenUsuario"));
 
 //login 
 var loginButton = document.getElementById("loginButton");
@@ -118,9 +118,6 @@ function loginRequest() {
             console.log(localStorage.getItem("tokenUsuario"));
         }
     }
-
-
-
 }
 
 //forEach functions
