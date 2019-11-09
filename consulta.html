@@ -25,7 +25,7 @@
 </head>
 
 <body>
-
+    <script src="consulta.js"></script>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
@@ -51,7 +51,6 @@
                 <div class="btn btn-primary">Buscar</div>
             </div>
         </div>
-    
         
     
         <div class="row  mt-4" id="lista">
@@ -70,7 +69,7 @@
                         <a href="#" class="btn btn-primary edit"><i class="fas fa-search edit  "></i></a>
                     </div>
                     <div class="row">
-                        <a href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  "></i></a>
+                        <a onclick="editUser('j@j.com')" href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  " id="editJohn"></i></a>
                     </div>
                     <div class="row">
                         <a href="#" class="btn btn-primary mt-2"><i class="fas fa-trash-alt  remove "></i></i></a>
@@ -111,6 +110,93 @@
 
     </div>
 
+    <!-- EditModal -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Editar usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="registryForm">
+                    <div class="row">
+                    <div class="col-6">
+                        <input type="text" name="nombre" id="editName" class="form-control" placeholder="Nombre o nombres" aria-describedby="helpId" required>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" name="apellido" id="editLast" class="form-control" placeholder="Apellidos" aria-describedby="helpId" required>
+                    </div>
+                
+                    </div>
+
+                    <input type="email" name="correo" id="editCorreo" class="form-control mt-3" placeholder="Tu correo" aria-describedby="helpId" required>
+        
+                    <input type="password" name="password" id="editPassword1" class="form-control mt-3" placeholder="Contraseña" aria-describedby="helpId" required >
+                
+                    <input type="password" name="confirmPassword" id="editPassword2" class="form-control mt-3" placeholder="Confirmar contraseña" aria-describedby="helpId" required >
+
+                    <input type="date" class="form-control mt-3" value="2000-01-01" name="fecha" id="editDate" >
+
+                    <div class="radioB mt-3 border">
+
+                        <div class="form-check">
+                            <label class="form-check-label ml-3">
+                                <input type="radio" class="form-check-input sexoF" name="sexo" id="editSexM" value="M"
+                                    checked>
+                                Mujer
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <label class="form-check-label ml-3">
+                                <input type="radio" class="form-check-input sexoM" name="sexo" id="editSexH" value="H">
+                                Hombre
+                            </label>
+                        </div>
+                    </div>
+
+                    <input type="url" name="url" id="editUrl" class="form-control mt-3" placeholder="Url de imagen de perfil" aria-describedby="helpId">
+
+                
+                <!-- <div class="row">
+                    <div class="col-4">
+                    <label for="">día</label>
+                    <select class="form-control" name="" id="">
+                        <option>opc1</option>
+                        <option>opc2</option>
+                        <option>opc3</option>
+                    </select>
+                    </div>
+                    <div class="col-4">
+                        <label for="">mes</label>
+                        <select class="form-control" name="" id="">
+                        <option>opc1</option>
+                        <option>opc2</option>
+                        <option>opc3</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label for="">año</label>
+                        <select class="form-control" name="" id="">
+                            <option>opc1</option>
+                            <option>opc2</option>
+                            <option>opc3</option>
+                        </select>
+                        </div>  
+                </div> -->
+                <button type="submit" id="submitRegistry" class="btn btn-success mt-3">Actualizar</button>
+                <button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Close</button>
+            
+                </form>
+
+            </div>
+            
+        </div>
+        </div>
+    </div>
 
    
     <!-- Optional JavaScript -->
@@ -125,7 +211,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="superScript.js"></script>
-    <script src="consulta.js"></script>
+    
 </body>
 
 </html>

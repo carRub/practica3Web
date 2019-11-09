@@ -14,6 +14,10 @@
 window.onload = loadUsers;
 
 
+//edit buttons
+
+
+
 //load and display users from the backend
 function loadUsers() {
     xhr = new XMLHttpRequest();
@@ -56,10 +60,10 @@ function generateHtml(item, index) {
                     <a onclick="viewDetails(${userObj.correo})" href="#" class="btn btn-primary edit"><i class="fas fa-search edit  "></i></a>
                 </div>
                 <div class="row">
-                    <a onclick="edit" href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  "></i></a>
+                    <a onclick='editUser(${userObj.correo})' href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  "></i></a>
                 </div>
                 <div class="row">
-                    <a href="#" class="btn btn-primary mt-2"><i class="fas fa-trash-alt  remove "></i></i></a>
+                    <a onclick="removeUser(${userObj.correo})" href="#" class="btn btn-primary mt-2"><i class="fas fa-trash-alt  remove "></i></i></a>
                 </div>
             </div>
         `
@@ -74,7 +78,6 @@ function getUserByEmail(item, index) {
     userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
     userXhr.send();
     userXhr.onload = function() {
-        console.log(item);
         if(userXhr.status != 200){
             alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
         }else {
@@ -88,3 +91,27 @@ function viewDetails(correo) {
 
 }
 
+//edit Users / onclick handler
+function editUSer(correo) {
+    let userXhr = new XMLHttpRequest();
+    userXhr.open("GET", `${baseUrl}users/${correo}/`);
+    userXhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
+    userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
+    userXhr.send();
+    userXhr.onload = function() {
+        if(userXhr.status != 200) {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+        } else {
+            let tmp = JSON.parse(userXhr.statusText);
+            editName.value = tmp.nombre;
+            console.log(editName.value);
+        }
+
+    }
+
+}
+
+//remove user / onclick handler
+function removeUser(correo) {
+
+}
