@@ -20,6 +20,7 @@ window.onload = loadUsers;
 
 //load and display users from the backend
 function loadUsers() {
+    
     xhr = new XMLHttpRequest();
     xhr.open("GET", `${baseUrl}users/`);
     xhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
