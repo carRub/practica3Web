@@ -20,12 +20,12 @@
                  border-radius: 5px; 
                  box-shadow:0px 2px 1px rgba(0,0,0,0.04); 
                  background:#fff;}
-        </style>
-
+    </style>
+    <script type="text/javascript" src="consulta.js"></script>
 </head>
 
 <body>
-
+    
     <nav class="navbar navbar-expand navbar-dark bg-dark">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
@@ -35,7 +35,6 @@
             </div>
     </nav>
     
-
 
     <div class="container">
 
@@ -54,7 +53,7 @@
         
     
         <div class="row  mt-4" id="lista">
-            <div class="media col-8 mt-2" id="modelo">
+            <!--<div class="media col-8 mt-2" id="modelo">
                 <div class="media-left align-self-center mr-3">
                     <img class="rounded-circle" style="width: inherit;" src="https://randomuser.me/api/portraits/men/0.jpg">
                 </div>
@@ -69,7 +68,7 @@
                         <a href="#" class="btn btn-primary edit"><i class="fas fa-search edit  "></i></a>
                     </div>
                     <div class="row">
-                        <a onclick="editUser('j@j.com')" href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  " id="editJohn"></i></a>
+                        <a onclick="editUser('j@j.com')" href="#" class="btn btn-primary mt-2" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-alt edit  " id="editJohn"></i></a>
                     </div>
                     <div class="row">
                         <a href="#" class="btn btn-primary mt-2"><i class="fas fa-trash-alt  remove "></i></i></a>
@@ -94,7 +93,7 @@
                         <div class="btn btn-primary mt-2"><i class="fas fa-trash-alt remove "></i></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
         
@@ -121,7 +120,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="" id="registryForm">
+                <form action="" id="editForm">
                     <div class="row">
                     <div class="col-6">
                         <input type="text" name="nombre" id="editName" class="form-control" placeholder="Nombre o nombres" aria-describedby="helpId" required>
@@ -132,19 +131,17 @@
                 
                     </div>
 
-                    <input type="email" name="correo" id="editCorreo" class="form-control mt-3" placeholder="Tu correo" aria-describedby="helpId" required>
+                    <input type="email" name="correo" id="editCorreo" class="form-control mt-3" placeholder="Tu correo" aria-describedby="helpId">
         
-                    <input type="password" name="password" id="editPassword1" class="form-control mt-3" placeholder="Contraseña" aria-describedby="helpId" required >
-                
-                    <input type="password" name="confirmPassword" id="editPassword2" class="form-control mt-3" placeholder="Confirmar contraseña" aria-describedby="helpId" required >
+                    <input type="text" name="password" id="editPassword1" class="form-control mt-3" placeholder="Contraseña" aria-describedby="helpId" required >
 
-                    <input type="date" class="form-control mt-3" value="2000-01-01" name="fecha" id="editDate" >
+                    <input type="text" class="form-control mt-3" value="2000-01-01" name="fecha" id="editDate" required>
 
                     <div class="radioB mt-3 border">
 
                         <div class="form-check">
                             <label class="form-check-label ml-3">
-                                <input type="radio" class="form-check-input sexoF" name="sexo" id="editSexM" value="M"
+                                <input type="radio" class="form-check-input sexoF" name="sexo" id="editSexH" value="M"
                                     checked>
                                 Mujer
                             </label>
@@ -152,7 +149,7 @@
 
                         <div class="form-check">
                             <label class="form-check-label ml-3">
-                                <input type="radio" class="form-check-input sexoM" name="sexo" id="editSexH" value="H">
+                                <input type="radio" class="form-check-input sexoM" name="sexo" id="editSexM" value="H">
                                 Hombre
                             </label>
                         </div>
@@ -160,34 +157,7 @@
 
                     <input type="url" name="url" id="editUrl" class="form-control mt-3" placeholder="Url de imagen de perfil" aria-describedby="helpId">
 
-                
-                <!-- <div class="row">
-                    <div class="col-4">
-                    <label for="">día</label>
-                    <select class="form-control" name="" id="">
-                        <option>opc1</option>
-                        <option>opc2</option>
-                        <option>opc3</option>
-                    </select>
-                    </div>
-                    <div class="col-4">
-                        <label for="">mes</label>
-                        <select class="form-control" name="" id="">
-                        <option>opc1</option>
-                        <option>opc2</option>
-                        <option>opc3</option>
-                        </select>
-                    </div>
-                    <div class="col-4">
-                        <label for="">año</label>
-                        <select class="form-control" name="" id="">
-                            <option>opc1</option>
-                            <option>opc2</option>
-                            <option>opc3</option>
-                        </select>
-                        </div>  
-                </div> -->
-                <button type="submit" id="submitRegistry" class="btn btn-success mt-3">Actualizar</button>
+                <button type="submit" id="submitEdit" class="btn btn-success mt-3">Actualizar</button>
                 <button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Close</button>
             
                 </form>
@@ -195,6 +165,50 @@
             </div>
             
         </div>
+        </div>
+    </div>
+
+    <!-- Delete confirm 1 -->
+    <div class="modal fade" id="deleteConfirmation" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa fa-trash"></i> Delete User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <h6>¿Está seguro de querer borrar a este usuario?</h6>                    
+                    <div class="media d-flex flex-row justify-content-between mx-2 my-2 alert alert-danger">
+                        <!-- Foto -->
+                        <div class="media-left col col-2 align-self-center ml-2">
+                            <div class="row">
+                                <img id="deleteUrl" class="rounded-circle mx-auto" alt="Generic pace holder image" width="inherit">
+                            </div>            
+                        </div>
+                        <!-- Info -->
+                        <div class="media-body col col-9 align-self-center ml-0">
+                            <div class="row">
+                                <h3 id="deleteNombre">John Doe</h3>
+                            </div>
+                            <div class="row">
+                                <p id="deleteCorreo">Correo: jdoe@test.com</p>
+                            </div>
+                            <div class="row">
+                                <p id="deleteFecha">Fecha de nacimiento: 01-01-2001</p>
+                            </div>
+                            <div class="row">
+                                <p id="deleteSexo">Sexo: Hombre</p>
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="deleteButton" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -211,6 +225,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="superScript.js"></script>
+    
     
 </body>
 

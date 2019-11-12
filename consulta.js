@@ -12,15 +12,11 @@
 //admin users
 // console.log("I'm loaded");
 window.onload = loadUsers;
-
-
-//edit buttons
-
-
+var userObj = {};
 
 //load and display users from the backend
 function loadUsers() {
-    
+    console.log("loaded");
     xhr = new XMLHttpRequest();
     xhr.open("GET", `${baseUrl}users/`);
     xhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
@@ -32,7 +28,7 @@ function loadUsers() {
         }else {
             //generar HTML
             let usersArray = JSON.parse(xhr.responseText);
-            // console.table(usersArray);
+            //console.table(usersArray);
             usersArray.forEach(generateHtml);
         }
     }
@@ -52,19 +48,18 @@ function generateHtml(item, index) {
             <div class="media-body">
                 <h4>${userObj.nombre} ${userObj.apellido}</h4>
                 <p >Correo: ${userObj.correo}</p>
-                <br>
-                <!--<p >Fecha de nacimiento: 01-01-2001 </p>-->
+                <p >Fecha de nacimiento: ${userObj.fecha} </p>
                 <p >Sexo: ${userObj.sexo == "H" ? "Hombre" : "Mujer"} </p>
             </div>
             <div class="media-right align-self-center">
                 <div class="row">
-                    <a onclick="viewDetails(${userObj.correo})" href="#" class="btn btn-primary edit"><i class="fas fa-search edit  "></i></a>
+                    <a onclick="viewDetails('${userObj.correo}')" href="#" class="btn btn-primary"><i class="fas fa-search  "></i></a>
                 </div>
                 <div class="row">
-                    <a onclick='editUser(${userObj.correo})' href="#" class="btn btn-primary mt-2"><i class="fas fa-pencil-alt edit  "></i></a>
+                    <a onclick="editUser('${userObj.correo}')" href="#" class="btn btn-primary mt-2 editBut" data-toggle="modal" data-target="#edit"><i class="fas fa-pencil-alt  "></i></a>
                 </div>
                 <div class="row">
-                    <a onclick="removeUser(${userObj.correo})" href="#" class="btn btn-primary mt-2"><i class="fas fa-trash-alt  remove "></i></i></a>
+                    <a onclick="removeUser('${userObj.correo}')" href="#" class="btn btn-primary mt-2" data-toggle="modal" data-target="#deleteConfirmation"><i class="fas fa-trash-alt "></i></i></a>
                 </div>
             </div>
         `
@@ -89,11 +84,11 @@ function getUserByEmail(item, index) {
 
 //TODO
 function viewDetails(correo) {
-
+    console.log(correo);
 }
 
 //edit Users / onclick handler
-function editUSer(correo) {
+function editUser(correo) {
     let userXhr = new XMLHttpRequest();
     userXhr.open("GET", `${baseUrl}users/${correo}/`);
     userXhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
@@ -103,16 +98,82 @@ function editUSer(correo) {
         if(userXhr.status != 200) {
             alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
         } else {
-            let tmp = JSON.parse(userXhr.statusText);
-            editName.value = tmp.nombre;
-            console.log(editName.value);
+            userObj = JSON.parse(userXhr.responseText);
+            updateEditModal();
+            //document.getElementById("submitEdit").addEventListener("click", updateUser);
+            //TODO: //save the new info from the user.
+        }
+
+    }
+}
+
+
+//remove user / onclick handler
+function removeUser(correo) {
+    let userXhr = new XMLHttpRequest();
+    userXhr.open("GET", `${baseUrl}users/${correo}/`);
+    userXhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
+    userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
+    userXhr.send();
+    userXhr.onload = function() {
+        if(userXhr.status != 200) {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+        } else {
+            userObj = JSON.parse(userXhr.responseText);
+            updateDeleteModal();
+            document.getElementById("deleteButton").addEventListener("click", deleteUser);
         }
 
     }
 
 }
 
-//remove user / onclick handler
-function removeUser(correo) {
+function updateEditModal() {
 
+    document.getElementById("editSexH").setAttribute("disabled", true);
+    document.getElementById("editSexM").setAttribute("disabled", true);
+    document.getElementById("editCorreo").setAttribute("disabled", true);
+
+    document.getElementById("editName").value = userObj.nombre;
+    document.getElementById("editLast").value = userObj.apellido;
+    document.getElementById("editCorreo").value = userObj.correo;
+    document.getElementById("editDate").value = userObj.fecha;
+    document.getElementById("editUrl").value = userObj.url;
+    document.getElementById("editPassword1").value = userObj.password;
+
+    if(userObj.sexo == "H"){
+        document.getElementById("editSexH").setAttribute("CHECKED", true);
+        document.getElementById("editSexM").setAttribute("checked", false);
+
+    } else {
+        document.getElementById("editSexH").setAttribute("checked", false);
+        document.getElementById("editSexM").setAttribute("checked", true);
+    }
+}
+
+function updateDeleteModal() {
+
+    document.getElementById("deleteUrl").setAttribute("src", userObj.url);
+    document.getElementById("deleteNombre").innerText = `${userObj.nombre} ${userObj.apellido}`;
+    document.getElementById("deleteCorreo").innerText = `Correo. ${userObj.correo}`;
+    document.getElementById("deleteFecha").innerText = `Fecha de nacimiento: ${userObj.fecha}`;
+    document.getElementById("deleteSexo").innerText = `Sexo: ${userObj.sexo == 'H' ? 'Hombre' : 'Mujer'}`;
+
+}
+
+function deleteUser() {
+    console.log("delete on click")
+    let userXhr = new XMLHttpRequest();
+    userXhr.open("DELETE", `${baseUrl}users/${userObj.correo}/`);
+    userXhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
+    userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
+    userXhr.send();
+    userXhr.onload = function() {
+        if(userXhr.status != 200) {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+        } else {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+            location.reload();
+        }
+    }
 }

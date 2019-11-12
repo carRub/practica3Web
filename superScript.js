@@ -28,7 +28,6 @@ if(form != null){
 var submit = document.getElementById("submitRegistry");
 if(submit != null) submit.disabled = true;
 
-
 //login 
 var loginButton = document.getElementById("loginButton");
 if(loginButton != null) loginButton.onclick = loginRequest;
@@ -69,7 +68,7 @@ function submitForm(event) {
     let inputArr = Array.from(document.querySelectorAll("#registryForm input:valid"));
     inputArr.forEach(createInputJson); 
 
-    //manage de URL
+    //manage the URL
     if(user.url == ""){
         let menCount = parseInt(localStorage.getItem("menCount"));
         let womenCount = parseInt(localStorage.getItem("womenCount"));

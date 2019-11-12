@@ -24,7 +24,7 @@
 # x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
 
 # {
-#  "correo": "c@c.com",
+#  "correo": "test@test.com",
 #  "password": "123"
 # }
 
@@ -43,21 +43,15 @@
 
 
 ### OBTENER USUARIO test2@t.com
-GET https://users-dasw.herokuapp.com/api/users/j@j.com
+GET https://users-dasw.herokuapp.com/api/users/test@test.com
 Content-Type: application/json
 x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
-x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjk2MzA5LCJleHAiOjE1NzMyOTk5MDl9.pTz2HA19pQcTjnGvVutBhfPMvM38J48BhVcCbqLQRDw
+x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidGVzdEB0ZXN0LmNvbSIsImlpZCI6MTMsImlhdCI6MTU3MzUxNzgwOSwiZXhwIjoxNTczNTIxNDA5fQ.AA5rXcDdDQPoIIaaBpcwioRHiCtzKDoaOj62E6jhn1I
 
 
 # GET https://users-dasw.herokuapp.com/api/users?hola
 # x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
 # x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NiwiaWF0IjoxNTczMjg2OTM5LCJleHAiOjE1NzMyOTA1Mzl9.WgD-yTA_CrZhS462NpmL_zsB_bj2Gio3_B6Lw1P1bqM
-
-
-
-
-
-
 
 
 ##
@@ -69,3 +63,20 @@ x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1I
 # x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw 
 # x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidDEyM0B0LmNvbSIsImlpZCI6MiwiaWF0IjoxNTczMjU3OTA3LCJleHAiOjE1NzMyNjE1MDd9.M6jbiz0AdcXQemOjVGvIS5IMvBC5qMKbM_loJVOvp-M
   ##"tokenUsuario": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoiY0BjLmNvbSIsImlpZCI6NCwiaWF0IjoxNTczMjYwNjk3LCJleHAiOjE1NzMyNjQyOTd9.RelJJEgC1u5OjyLDqF1sd4NaNC-w755aq4i1Yh1jF6I"
+
+
+### ACTUALIZAR USUARIO t@t.com
+# PUT https://users-dasw.herokuapp.com/api/users/test@test.com
+# Content-Type: application/json
+# x-auth: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiaWF0IjoxNTcyMjcxMTAwfQ.Ifaroy08WSikYjZuiKfC-vAVj8s2VF5iXdZR1FCXKhw
+# x-user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBlZGllbnRlIjoiNzA5Mzg1IiwiY29ycmVvIjoidGVzdEB0ZXN0LmNvbSIsImlpZCI6MTMsImlhdCI6MTU3MzUxNzgwOSwiZXhwIjoxNTczNTIxNDA5fQ.AA5rXcDdDQPoIIaaBpcwioRHiCtzKDoaOj62E6jhn1I
+
+# {
+#   "nombre":"Carlos",
+#   "apellido":"Rubio",
+#   "correo":"test@test.com",
+#   "url": "https://randomuser.me/api/portraits/men/10.jpg",
+#   "sexo":"H",
+#   "fecha":"05-04-1996",
+#   "password":"123"
+# }
