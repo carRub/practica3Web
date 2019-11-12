@@ -99,8 +99,9 @@ function editUser(correo) {
             alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
         } else {
             userObj = JSON.parse(userXhr.responseText);
+            document.getElementById("editForm").addEventListener("submit", updateUser);
             updateEditModal();
-            //document.getElementById("submitEdit").addEventListener("click", updateUser);
+            console.log("I'm still here");
             //TODO: //save the new info from the user.
         }
 
@@ -169,6 +170,32 @@ function deleteUser() {
     userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
     userXhr.send();
     userXhr.onload = function() {
+        if(userXhr.status != 200) {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+        } else {
+            alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
+            location.reload();
+        }
+    }
+}
+
+function updateUser(event) {
+    event.preventDefault(); 
+    console.log("update user");
+    let formInputs = document.querySelectorAll("#edit input:valid");
+    let formInputsArray =  Array.from(formInputs);
+    let string = "{";
+    formInputsArray.forEach((item) => string += `"${item.name}":"${item.value}",`);
+    string = string.slice(0, -1) + "}";
+    console.log("update: " + string);
+
+    let userXhr = new XMLHttpRequest();
+    userXhr.open("PUT", `${baseUrl}users/${userObj.correo}/`);
+    userXhr.setRequestHeader('Content-Type', 'application/json');
+    userXhr.setRequestHeader('x-auth', localStorage.getItem("tokenAlumno"));
+    userXhr.setRequestHeader('x-user-token', localStorage.getItem("tokenUsuario"));
+    userXhr.send(string);
+    userXhr.onload = function () {
         if(userXhr.status != 200) {
             alert(userXhr.status + ': ' + userXhr.statusText + ' ' + userXhr.responseText);
         } else {
